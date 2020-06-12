@@ -30,7 +30,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 指定生成pojo的映射xml文件的所在包和此包在项目中的地址 -->
-        <sqlMapGenerator targetPackage="Mapper"
+        <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
@@ -40,7 +40,17 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 配置表名 -->
-        <table tableName=""></table>
-        <table tableName=""></table>
+        <table tableName="order" domainObjectName="Order"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="user_infor" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="view_infor" domainObjectName="View"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
