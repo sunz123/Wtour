@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>视频管理平台</title>
+    <title>我透旅游网</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -27,7 +27,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    <img src="/img/123.jpg" class="layui-nav-img">
                     贤心
                 </a>
                 <dl class="layui-nav-child">
@@ -44,18 +44,24 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">视频管理</a>
+                    <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <!--
                             target取值根iframe的name值保持一致
                         -->
-                        <dd><a href="/video/videolist_page" target="main">视频列表</a></dd>
+                        <dd><a href="/user/userlist_page" target="main">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">用户管理</a>
+                    <a href="javascript:;">景点管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="javascript:;">景点列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">订单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">订单列表</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -78,7 +84,6 @@
     //JavaScript代码区域
     layui.use('element', function(){
         var element = layui.element;
-
     });
 </script>
 </body>

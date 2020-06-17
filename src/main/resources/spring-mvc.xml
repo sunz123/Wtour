@@ -49,14 +49,15 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <!--  屏蔽解析器  -->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"></mvc:resources>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"></mvc:resources>
+    <mvc:resources mapping="/img/**" location="/WEB-INF/img/"></mvc:resources>
+    <mvc:resources mapping="/layui/**" location="/WEB-INF/layui/"></mvc:resources>
     <!-- 配置视图解释器的前缀和后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"></property>
         <property name="suffix" value=".html"></property>
     </bean>
-    <!--  屏蔽解析器  -->
-    <mvc:resources mapping="/asset/css/**" location="/WEB-INF/asset/css/"></mvc:resources>
-    <mvc:resources mapping="/asset/js/**" location="/WEB-INF/asset/js/"></mvc:resources>
-    <mvc:resources mapping="/asset/img/**" location="/WEB-INF/asset/img/"></mvc:resources>
-    <mvc:resources mapping="/asset/layui/**" location="/WEB-INF/asset/layui/"></mvc:resources>
+
 </beans>
