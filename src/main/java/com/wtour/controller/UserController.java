@@ -14,14 +14,34 @@ public class UserController {
 	public UserService userService;
 
 	@RequestMapping("/userlist_page")
-	public String userList_page(){
+	public String userList_page() {
 		return "userlist";
 	}
 
-	@RequestMapping("userlist")
+	@RequestMapping("/userlist")
 	@ResponseBody
-	public Result userlist(){
-		Result result = userService.getUserList();
+	public Result userlist(Integer page, Integer limit) {
+		Result result = userService.getUserList(page, limit);
 		return result;
 	}
+
+	@RequestMapping("/deleteBatch")
+	@ResponseBody
+	public Result deleteBatch(Integer[] ids){
+		Result result = userService.deleteBatch(ids);
+		return result;
+	}
+
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Result deleteUser(Integer id){
+		Result result = userService.deleteUser(id);
+		return result;
+	}
+
+	@RequestMapping("/adduser_page")
+	public String addUserPage()	{
+		return "addUser";
+	}
+
 }

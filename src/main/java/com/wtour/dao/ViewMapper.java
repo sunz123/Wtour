@@ -13,4 +13,6 @@ public interface ViewMapper {
     List<View> selectAll();
 
     int updateByPrimaryKey(View record);
+
+
 }
