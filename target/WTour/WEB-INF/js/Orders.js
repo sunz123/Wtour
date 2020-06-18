@@ -1,19 +1,19 @@
-layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
+layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel'], function(){
     var laydate = layui.laydate //日期
         ,laypage = layui.laypage //分页
         ,layer = layui.layer //弹层
         ,table = layui.table //表格
+        ,carousel = layui.carousel //轮播
         ,$ = layui.$
-        ,form = layui.form;
 
     //向世界问个好
-    layer.msg('Hello User');
+    layer.msg('Hello Order');
 
     //执行一个 table 实例
-    var user_table = table.render({
-        elem: '#userlist'
+    var order_table = table.render({
+        elem: '#orderlist'
         ,height: 420
-        ,url: '/user/userlist' //数据接口
+        ,url: '/order/orderlist' //数据接口
         ,parseData: function (res) {
             return {
                 "code":res.status,
@@ -27,20 +27,21 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
         ,toolbar: '#headBar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
         ,cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            ,{field: 'userid', title: 'ID',  sort: true, fixed: 'left', totalRowText: '合计：'}
-            ,{field: 'username', title: '用户名' }
-            ,{field: 'password', title: '密码',unresize: true, edit: true}
-            ,{field: 'identity', title: '身份',  sort: true, unresize: true}
+            ,{field: 'orderid', title: '订单ID',  sort: true, fixed: 'left', totalRowText: '合计：'}
+            ,{field: 'name', title: '用户名' }
+            ,{field: 'amount', title: '数量',unresize: true }
+            ,{field: 'spot', title: '地点',  sort: true, unresize: true}
             // unresize 是否拖拽
-            ,{field: 'sex', title: '性别', width:80 , unresize: true}
-            ,{field: 'realname', title: '真实姓名', unresize: true}
+            ,{field: 'sumPrice', title: '总价', width:80 , unresize: true}
+            ,{field: 'userid', title: '用户ID', unresize: true}
+            ,{field: 'viewid', title: '景点ID', unresize: true}
             ,{fixed: 'right',toolbar: '#barDemo'}
         ]]
     });
 
     //监听头工具栏事件
     // 监听的是表格的lay-filter的取值
-    table.on('toolbar(userTable)', function(obj){
+    table.on('toolbar(orderTable)', function(obj){
         var checkStatus = table.checkStatus(obj.config.id)//表格的id
             ,data = checkStatus.data; //获取选中的数据(将数据封装成json对象给你返回组成数组)
         //定义存放被删除数据id的数组
@@ -54,7 +55,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
                 layer.open({
                     //0（信息框，默认）1（页面层）2（iframe层）
                     type:2,
-                    content:"/user/adduser_page",//添加用户的页面
+                    content:"",//添加用户的页面
                     area: ['70%', '70%'],
                     shade:0.8,//弹层外的区域透明度取值
                     shadeClose:true//是否点击遮罩关闭
@@ -66,7 +67,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
                 } else {
                     //将获取的选中要删除的id数组传到后台
                     $.ajax({
-                        url:"/user/deleteBatch",//批量删除的接口
+                        url:"",//批量删除的接口
                         type:"post",//请求方式
                         data:{//传递到后台的参数
                             //id数组
@@ -84,7 +85,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
                                     //关闭弹框
                                     layer.close(index);
                                     //重载表格
-                                    user_table.reload();
+                                    order_table.reload();
                                 })
                             }
                         }
@@ -95,7 +96,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
     });
 
     //监听行工具事件
-    table.on('tool(userTable)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+    table.on('tool(orderTable)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
         var data = obj.data //获得当前行数据
             ,layEvent = obj.event; //获得 lay-event 对应的值
         if(layEvent === 'detail'){
@@ -105,7 +106,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
                 layer.close(index);
                 //向服务端发送删除指令
                 $.ajax({
-                    url: '/user/delete',//单个删除接口
+                    url: '',//
                     type:"post",
                     data:{
                         "id":data.userid
@@ -121,50 +122,5 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
         } else if(layEvent === 'edit'){
             layer.msg('编辑操作');
         }
-    });
-
-    // 监听单元格编辑事件
-    table.on('edit(userTable)', function(obj){ //注：edit是固定事件名，括号里是table原始容器的属性 lay-filter="对应的值"
-        var value = obj.value //得到修改后的值
-            ,field = obj.field //当前编辑的字段名
-            ,data = obj.data; //所在行的所有相关数据
-        // 添加后台删除数据接口
-        $.ajax({
-            url: '/user/updateById' ,//修改单个属性的接口
-            type: "post",
-            data:{
-                "uid": data.userid, //被修改的用户id
-                "value": value, /// 被修改之后的值
-                "field":field //被修改的字段名
-            },
-            dataType:"json",
-            success:function (res) {
-                if (res.status == 200){
-                    layer.msg(res.message);
-                    user_table.reload();
-                }else {
-                    layer.msg(res.message);
-                }
-            }
-        });
-    });
-
-    form.on('submit(add)', function(data){
-        // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-        // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-        // console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-       $.ajax({
-            url:'/user/adduser', // 添加用户的接口
-            type:"post",
-            data:data.field,
-            success:function (res) {
-                if (res.status == 200){
-                    layer.msg(res.message);
-                    window.parent.location.reload(); //父窗口重载
-                }else {
-                }
-            }
-        });
-        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
 })

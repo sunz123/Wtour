@@ -11,7 +11,7 @@
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_infor
-    where userid = #{userid,jdbcType=INTEGER}ni
+    where userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wtour.pojo.User" >
     insert into user_infor (userid, username, password, 
@@ -44,7 +44,7 @@
     from user_infor limit #{start},#{limit}
   </select>
   <select id="selectCount" resultMap="BaseResultMap">
-    select count(userid) from user_infor
+    select count(*) from user_infor
   </select>
   <delete id="deleteBatch">
     delete from user_infor where userid in
@@ -52,4 +52,13 @@
       #{id}
     </foreach>
   </delete>
+  <update id="updateById">
+    update user_infor
+    <set>
+      <if test="field=='password'">
+        password = #{value}
+      </if>
+    </set>
+    where userid = #{id}
+  </update>
 </mapper>

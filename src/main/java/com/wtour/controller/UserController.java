@@ -1,5 +1,6 @@
 package com.wtour.controller;
 
+import com.wtour.pojo.User;
 import com.wtour.service.UserService;
 import com.wtour.unit.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,20 @@ public class UserController {
 	@RequestMapping("/adduser_page")
 	public String addUserPage()	{
 		return "addUser";
+	}
+
+	@RequestMapping("adduser")
+	@ResponseBody
+	public Result addUser(User user){
+		Result result = userService.addUser(user);
+		return result;
+	}
+
+	@RequestMapping("/updateById")
+	@ResponseBody
+	public Result updateById(Integer uid, String value, String field){
+		Result result = userService.updateById(uid,value,field);
+		return result;
 	}
 
 }

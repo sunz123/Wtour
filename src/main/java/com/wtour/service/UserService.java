@@ -1,5 +1,6 @@
 package com.wtour.service;
 
+import com.wtour.pojo.User;
 import com.wtour.unit.Result;
 
 public interface UserService {
@@ -17,7 +18,7 @@ public interface UserService {
 	 * @param ids
 	 * @return
 	 */
-	public Result deleteBatch(Integer[] ids);
+	Result deleteBatch(Integer[] ids);
 
 	/**
 	 * 删除一个用户
@@ -25,4 +26,20 @@ public interface UserService {
 	 * @return
 	 */
 	Result deleteUser(Integer id);
+
+	/**
+	 * 根据id更改用户的一个属性
+	 * @param id
+	 * @param value
+	 * @param field
+	 * @return
+	 */
+	Result updateById(Integer id, String value, String field);
+
+	/**
+	 * 添加用户
+	 * @param user
+	 * @return
+	 */
+	Result addUser(User user);
 }

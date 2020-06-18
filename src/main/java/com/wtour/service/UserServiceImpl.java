@@ -3,6 +3,7 @@ package com.wtour.service;
 import com.wtour.dao.UserMapper;
 import com.wtour.pojo.User;
 import com.wtour.unit.Result;
+import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 		Result result = new Result();
 		List<User>  users = userMapper.findUserListByPage(start, limit);
 		Integer count = userMapper.selectCount();
-		result.setTotal(count);
+		result.setTotal(users.size());
 		result.setItem(users);
 		return result;
 	}
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
 			result.setStatus(202);//
 			result.setMessage("error");
 		}
-		return null;
+		return result;
 	}
 
 	@Override
@@ -57,5 +58,26 @@ public class UserServiceImpl implements UserService {
 			result.setMessage("error");
 		}
 		return result;
+	}
+
+	@Override
+	public Result updateById(Integer id, String value, String field) {
+		Result result = new Result();
+		try {
+			userMapper.updateById(id,value,field);
+			result.setStatus(200);
+			result.setMessage("success");
+		}catch (Exception e){
+			e.printStackTrace();;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			result.setStatus(500);
+			result.setMessage("error");
+		}
+		return result;
+	}
+
+	@Override
+	public Result addUser(User user) {
+		return null;
 	}
 }

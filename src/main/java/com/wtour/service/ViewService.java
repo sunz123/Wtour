@@ -8,5 +8,5 @@ public interface ViewService {
 	 * 分页查询
 	 * @return
 	 */
-	Result getViewList(Integer page, Integer limit);
+	Result getViewList();
 }

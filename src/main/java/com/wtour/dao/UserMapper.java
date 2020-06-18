@@ -34,4 +34,12 @@ public interface UserMapper {
      * @param ids
      */
     void deleteBatch(@Param("ids") Integer[] ids);
+
+    /**
+     * 根据用户的ID更改一个属性
+     * @param id
+     * @param value
+     * @param field
+     */
+	void updateById(@Param("id") Integer id, @Param("value") String value, @Param("field") String field);
 }
