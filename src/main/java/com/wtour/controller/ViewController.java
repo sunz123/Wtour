@@ -21,8 +21,8 @@ public class ViewController {
 
 	@RequestMapping("/viewlist")
 	@ResponseBody
-	public Result viewList() {
-		Result result = viewService.getViewList();
+	public Result viewList(Integer page, Integer limit) {
+		Result result = viewService.getViewList(page, limit);
 		return result;
 	}
 }

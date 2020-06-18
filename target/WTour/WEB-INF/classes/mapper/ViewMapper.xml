@@ -41,4 +41,11 @@
     select viewid, spot, place, price, brief, video_path, image_path
     from view_infor
   </select>
+  <select id="getViewListById" resultMap="BaseResultMap">
+    select viewid, spot, place, price, brief, video_path, image_path
+    from view_infor limit #{start},#{limit}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from view_infor
+  </select>
 </mapper>

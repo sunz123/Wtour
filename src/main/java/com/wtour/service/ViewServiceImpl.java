@@ -17,11 +17,13 @@ public class ViewServiceImpl implements ViewService {
 	public ViewMapper viewMapper;
 
 	@Override
-	public Result getViewList() {
+	public Result getViewList(Integer page, Integer limit) {
+		Integer start = (page - 1) * limit;
 		Result result = new Result();
-		List<View> views = viewMapper.selectAll();
+		List<View> views = viewMapper.getViewListById(start,limit);
+		Integer count = viewMapper.selectCount();
 		result.setItem(views);
-		result.setTotal(views.size());
+		result.setTotal(count);
 		return result;
 	}
 }

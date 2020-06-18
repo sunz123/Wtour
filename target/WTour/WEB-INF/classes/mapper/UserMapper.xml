@@ -14,11 +14,11 @@
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wtour.pojo.User" >
-    insert into user_infor (userid, username, password, 
-      identity, sex, realname
+    insert into user_infor (username, password,
+       sex, realname
       )
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{identity,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}
+    values ( #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+       #{sex,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.wtour.pojo.User" >
@@ -43,7 +43,7 @@
     select userid, username, password, identity, sex, realname
     from user_infor limit #{start},#{limit}
   </select>
-  <select id="selectCount" resultMap="BaseResultMap">
+  <select id="selectCount" resultType="java.lang.Integer">
     select count(*) from user_infor
   </select>
   <delete id="deleteBatch">

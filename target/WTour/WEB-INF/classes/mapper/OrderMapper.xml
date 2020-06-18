@@ -11,11 +11,11 @@
     <result column="viewid" property="viewid" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
+    delete from user_order
     where orderid = #{orderid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wtour.pojo.Order" >
-    insert into order (orderid, name, amount, 
+    insert into user_order (orderid, name, amount,
       spot, sum_price, userid, 
       viewid)
     values (#{orderid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, 
@@ -23,7 +23,7 @@
       #{viewid,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.wtour.pojo.Order" >
-    update order
+    update user_order
     set name = #{name,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=INTEGER},
       spot = #{spot,jdbcType=VARCHAR},
@@ -34,11 +34,18 @@
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select orderid, name, amount, spot, sum_price, userid, viewid
-    from order
+    from user_order
     where orderid = #{orderid,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select orderid, name, amount, spot, sum_price, userid, viewid
-    from order
+    from user_order
+  </select>
+  <select id="getOrderListById" resultMap="BaseResultMap">
+    select orderid, name, amount, spot, sum_price, userid, viewid
+    from user_order limit #{start},#{limit}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from user_order
   </select>
 </mapper>

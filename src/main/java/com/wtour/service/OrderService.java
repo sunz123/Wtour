@@ -9,5 +9,5 @@ public interface OrderService {
 	 * @param limit
 	 * @return
 	 */
-	Result getOrderList();
+	Result getOrderList(Integer page, Integer limit);
 }

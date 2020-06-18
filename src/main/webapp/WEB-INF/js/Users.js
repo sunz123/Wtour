@@ -12,7 +12,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
     //执行一个 table 实例
     var user_table = table.render({
         elem: '#userlist'
-        ,height: 420
+        ,height: 500
         ,url: '/user/userlist' //数据接口
         ,parseData: function (res) {
             return {
@@ -162,6 +162,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
                     layer.msg(res.message);
                     window.parent.location.reload(); //父窗口重载
                 }else {
+                    layer.msg(res.message);
                 }
             }
         });

@@ -21,8 +21,8 @@ public class OrderController {
 
 	@RequestMapping("/orderlist")
 	@ResponseBody
-	public Result orderList(){
-		Result result = orderService.getOrderList();
+	public Result orderList(Integer page, Integer limit){
+		Result result = orderService.getOrderList(page, limit);
 		return result;
 	}
 }
