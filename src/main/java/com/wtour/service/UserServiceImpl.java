@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.text.ParsePosition;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -72,6 +76,21 @@ public class UserServiceImpl implements UserService {
 			result.setStatus(500);
 			result.setMessage("error");
 		}
+		return result;
+	}
+
+	@Override
+	public Result search(String keyname, Integer page, Integer limit) {
+		Integer start = (page - 1)*limit;
+		Result result = new Result();
+		Map<String, Object> param = new HashMap<>();
+		param.put("keyname",keyname);
+		param.put("start",start);
+		param.put("limit",limit);
+		List<User> users = userMapper.searchByKey(param);
+		Integer count = userMapper.searchByKeyCount(param);
+		result.setTotal(count);
+		result.setItem(users);
 		return result;
 	}
 

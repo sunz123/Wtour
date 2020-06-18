@@ -61,4 +61,22 @@
     </set>
     where userid = #{id}
   </update>
+  <select id="searchByKey" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select userid, username, password, identity, sex, realname
+    from user_infor
+    <where>
+      <if test="keyname!=''">
+        username like '%${keyname}%'
+      </if>
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="searchByKeyCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select count(*) from user_infor
+    <where>
+      <if test="keyname!=''">
+        username like '%${keyname}%'
+      </if>
+    </where>
+  </select>
 </mapper>

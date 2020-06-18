@@ -168,4 +168,16 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'form'], function(){
         });
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
+
+    $("#search").click(function () {
+        user_table.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                keyname:$("#keyname").val() // 关键字
+            }
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            url:'/user/search'
+        });
+    })
 })

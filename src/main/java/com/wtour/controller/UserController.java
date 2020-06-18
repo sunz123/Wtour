@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/user")
@@ -45,7 +46,7 @@ public class UserController {
 		return "addUser";
 	}
 
-	@RequestMapping("adduser")
+	@RequestMapping("/adduser")
 	@ResponseBody
 	public Result addUser(User user){
 		Result result = userService.addUser(user);
@@ -56,6 +57,15 @@ public class UserController {
 	@ResponseBody
 	public Result updateById(Integer uid, String value, String field){
 		Result result = userService.updateById(uid,value,field);
+		return result;
+	}
+
+	@RequestMapping("/search")
+	@ResponseBody
+	public Result search(String keyname, Integer page, Integer limit){
+		Result result = userService.search(keyname,page,limit);
+		System.out.println(keyname);
+		System.out.println(result.getTotal());
 		return result;
 	}
 

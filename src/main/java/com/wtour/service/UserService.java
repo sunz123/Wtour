@@ -42,4 +42,13 @@ public interface UserService {
 	 * @return
 	 */
 	Result addUser(User user);
+
+	/**
+	 * 按照关键词搜索
+	 * @param keyname
+	 * @param page
+	 * @param limit
+	 * @return
+	 */
+	Result search(String keyname, Integer page, Integer limit);
 }
