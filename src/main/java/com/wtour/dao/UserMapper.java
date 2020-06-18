@@ -57,4 +57,11 @@ public interface UserMapper {
      * @return
      */
     Integer searchByKeyCount(Map<String, Object> param);
+
+    /**
+     * 管理员登录
+     * @param username
+     * @return
+     */
+	User getByName(@Param("username") String username,@Param("password") String password);
 }

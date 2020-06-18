@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,7 +28,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="/img/123.jpg" class="layui-nav-img">
-                    贤心
+                    <sapn th:text="${session.user.getUsername()}">贤心</sapn>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>

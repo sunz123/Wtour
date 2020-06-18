@@ -79,4 +79,8 @@
       </if>
     </where>
   </select>
+  <select id="getByName" resultMap="BaseResultMap">
+    select userid, username, password, identity, sex, realname
+    from user_infor where username = #{username} and password = #{password}
+  </select>
 </mapper>
