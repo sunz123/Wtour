@@ -67,7 +67,7 @@ layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel'], function(){
                 } else {
                     //将获取的选中要删除的id数组传到后台
                     $.ajax({
-                        url:"",//批量删除的接口
+                        url:'',//批量删除的接口
                         type:"post",//请求方式
                         data:{//传递到后台的参数
                             //id数组

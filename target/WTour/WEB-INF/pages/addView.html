@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html  lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+<!--需要一个表单form action:后台添加图片的接口-->
+<form class="layui-form layui-form-pane" id="form">
+    <!--景点名称-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">景点</label>
+        <div class="layui-input-block">
+            <input type="text"  name="spot" required  lay-verify="required" autocomplete="off"   placeholder="View Name" class="layui-input" >
+        </div>
+    </div>
+
+    <!--景点位置-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">位置</label>
+        <div class="layui-input-block">
+            <input type="text"  name="place" required  lay-verify="required" autocomplete="off"   placeholder="View Location" class="layui-input" >
+        </div>
+    </div>
+
+    <!--门票价格-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-block">
+            <input type="text"  name="price" required  lay-verify="required" autocomplete="off"   placeholder="View Price" class="layui-input" >
+        </div>
+    </div>
+
+    <!--景点简介-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介</label>
+        <div class="layui-input-block">
+            <input type="text"  name="place" required  lay-verify="required" autocomplete="off"   placeholder="View Location" class="layui-input" >
+        </div>
+    </div>
+
+    <!--景点图片-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">景点图片</label>
+        <div class="layui-input-block">
+            <input type="text" name="imagePath" required id="imagePath" lay-verify="required"
+			lay-reqtext="至少选择一张图片！！" placeholder="图片信息" autocomplete="off" class="layui-input layui-disabled">
+            <!--图片上传-->
+            <div class="layui-upload">
+                <button type="button" class="layui-btn layui-btn-normal"  id="chooseimg">选择图片</button>
+                <button style="display: none;" type="button" class="layui-btn-danger layui-btn-xs remove-upload" id="delimg">删除</button>
+            </div>
+        </div>
+    </div>
+    <!--submit的提交按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button id="submit" type="submit" class="layui-btn" lay-submit="" lay-filter="submit_img" style="margin-left: 40%">立即提交</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="/layui/layui.js"></script>
+<script src="/js/View.js"></script>
+</html>

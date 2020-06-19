@@ -74,4 +74,17 @@ public class View implements Serializable {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath == null ? null : imagePath.trim();
     }
+
+    @Override
+    public String toString() {
+        return "View{" +
+                "viewid=" + viewid +
+                ", spot='" + spot + '\'' +
+                ", place='" + place + '\'' +
+                ", price=" + price +
+                ", brief='" + brief + '\'' +
+                ", videoPath='" + videoPath + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                '}';
+    }
 }
