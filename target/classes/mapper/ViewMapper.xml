@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wtour.dao.ViewMapper" >
+  <resultMap id="BaseResultMap" type="com.wtour.pojo.View" >
+    <id column="viewid" property="viewid" jdbcType="INTEGER" />
+    <result column="spot" property="spot" jdbcType="VARCHAR" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="brief" property="brief" jdbcType="VARCHAR" />
+    <result column="video_path" property="videoPath" jdbcType="VARCHAR" />
+    <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from view_infor
+    where viewid = #{viewid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wtour.pojo.View" >
+    insert into view_infor (viewid, spot, place, 
+      price, brief, video_path, 
+      image_path)
+    values (#{viewid,jdbcType=INTEGER}, #{spot,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{brief,jdbcType=VARCHAR}, #{videoPath,jdbcType=VARCHAR}, 
+      #{imagePath,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wtour.pojo.View" >
+    update view_infor
+    set spot = #{spot,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      brief = #{brief,jdbcType=VARCHAR},
+      video_path = #{videoPath,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where viewid = #{viewid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select viewid, spot, place, price, brief, video_path, image_path
+    from view_infor
+    where viewid = #{viewid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select viewid, spot, place, price, brief, video_path, image_path
+    from view_infor
+  </select>
+  <select id="getViewListById" resultMap="BaseResultMap">
+    select viewid, spot, place, price, brief, video_path, image_path
+    from view_infor limit #{start},#{limit}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from view_infor
+  </select>
+</mapper>

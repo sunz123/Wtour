@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wtour.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.wtour.pojo.Order" >
+    <id column="orderid" property="orderid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="spot" property="spot" jdbcType="VARCHAR" />
+    <result column="sum_price" property="sumPrice" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="viewid" property="viewid" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wtour.pojo.Order" >
+    insert into user_order (orderid, name, amount,
+      spot, sum_price, userid, 
+      viewid)
+    values (#{orderid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, 
+      #{spot,jdbcType=VARCHAR}, #{sumPrice,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{viewid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wtour.pojo.Order" >
+    update user_order
+    set name = #{name,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      spot = #{spot,jdbcType=VARCHAR},
+      sum_price = #{sumPrice,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      viewid = #{viewid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select orderid, name, amount, spot, sum_price, userid, viewid
+    from user_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select orderid, name, amount, spot, sum_price, userid, viewid
+    from user_order
+  </select>
+  <select id="getOrderListById" resultMap="BaseResultMap">
+    select orderid, name, amount, spot, sum_price, userid, viewid
+    from user_order limit #{start},#{limit}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from user_order
+  </select>
+</mapper>

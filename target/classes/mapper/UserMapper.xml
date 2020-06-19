@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wtour.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.wtour.pojo.User" >
+    <id column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_infor
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wtour.pojo.User" >
+    insert into user_infor (username, password,
+       sex, realname
+      )
+    values ( #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+       #{sex,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wtour.pojo.User" >
+    update user_infor
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select userid, username, password, identity, sex, realname
+    from user_infor
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select userid, username, password, identity, sex, realname
+    from user_infor
+  </select>
+  <select id="findUserListByPage" resultMap="BaseResultMap">
+    select userid, username, password, identity, sex, realname
+    from user_infor limit #{start},#{limit}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from user_infor
+  </select>
+  <delete id="deleteBatch">
+    delete from user_infor where userid in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+  <update id="updateById">
+    update user_infor
+    <set>
+      <if test="field=='password'">
+        password = #{value}
+      </if>
+    </set>
+    where userid = #{id}
+  </update>
+  <select id="searchByKey" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select userid, username, password, identity, sex, realname
+    from user_infor
+    <where>
+      <if test="keyname!=''">
+        username like '%${keyname}%'
+      </if>
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="searchByKeyCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select count(*) from user_infor
+    <where>
+      <if test="keyname!=''">
+        username like '%${keyname}%'
+      </if>
+    </where>
+  </select>
+  <select id="getByName" resultMap="BaseResultMap">
+    select userid, username, password, identity, sex, realname
+    from user_infor where username = #{username} and password = #{password}
+  </select>
+</mapper>

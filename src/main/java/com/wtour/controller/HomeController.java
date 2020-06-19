@@ -6,8 +6,8 @@ import com.wtour.service.UserService;
 import com.wtour.unit.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +29,49 @@ public class HomeController {
 		return "main";
 	}
 
+	/**
+	 * 门户网页接口
+	 * 首页界面
+	 */
+	@RequestMapping("/index_page")
+	public String index(){
+		return "index";
+	}
+
+	// 景点介绍界面
+	@RequestMapping("/about_page")
+	public String about(){
+		return "about";
+	}
+
+	// 景点显示界面
+	@RequestMapping("/views_page")
+	public String view(){
+		return "view";
+	}
+
+	// 用户修改界面
+	@RequestMapping("/modify_page")
+	public String modify(){
+		return "modify";
+	}
+
+	// 个人信息显示界面
+	@RequestMapping("/person_page")
+	public String person(){
+		return "person";
+	}
+
+	// 很随意的界面
+	@RequestMapping("/scenery_page")
+	public String scenery(){
+		return "scenery";
+	}
+
+	/**
+	 * 门户结束
+	 */
+
 	@RequestMapping("/login_page")
 	public String login_page(){
 		return "login";
@@ -40,6 +83,7 @@ public class HomeController {
 	}
 
 	@RequestMapping("/adminlogin")
+	@ResponseBody
 	public Result adminLogin(String username, String password, String code, HttpServletRequest request){
 		Result result = adminService.login(username,password,code,request);
 		System.out.println(username + "  " + password + "  " + code);
